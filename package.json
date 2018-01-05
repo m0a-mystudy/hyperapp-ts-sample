@@ -4,6 +4,24 @@
     "hyperapp": "1.0.1"
   },
   "devDependencies": {
+    "node-sass": "4.7.2",
     "typescript": "2.6.2"
-  }
+  },
+  "name": "hyperapp-ts-sample",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/m0a-mystudy/hyperapp-ts-sample.git"
+  },
+  "author": "m0a",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/m0a-mystudy/hyperapp-ts-sample/issues"
+  },
+  "homepage": "https://github.com/m0a-mystudy/hyperapp-ts-sample#readme",
+  "description": ""
 }

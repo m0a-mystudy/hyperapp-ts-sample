@@ -1,24 +1,51 @@
 import { h, app } from "hyperapp"
 
-const state = {
-  count: 0
+const SECONDS = 5
+
+const pad = (n: number) => (n < 10 ? "0" + n : n)
+
+const humanizeTime = (t: number) => {
+  const hours = (t / 3600) >> 0
+  const minutes = ((t - hours * 3600) / 60) >> 0
+  const seconds = (t - hours * 3600 - minutes * 60) >> 0
+  return `${pad(minutes)}:${pad(seconds)}`
 }
 
-interface State {
-    count: number;
+const state = {
+  count: SECONDS,
+  paused: true
 }
+
 
 const actions = {
-  down: () => (state:State) => ({ count: state.count - 1 }),
-  up: () => (state: State) => ({ count: state.count + 1 })
+  tick: () => (state: State, actions: Actions) => {
+    if (state.count === 0) {
+      actions.reset()
+      actions.toggle()
+    } else if (!state.paused) {
+      actions.drop()
+    }
+  },
+  drop: () => (state: State) => ({ count: state.count - 1 }),
+  reset: () => ({ count: SECONDS }),
+  toggle: () => (state: State) => ({ paused: !state.paused })
 }
-type Actions = typeof actions
+
+type State = typeof state;
+type Actions = typeof actions;
+
 const view = (state: State, actions: Actions) => (
   <main>
-    <h1>{state.count}</h1>
-    <button onclick={actions.down}>-</button>
-    <button onclick={actions.up}>+</button>
+    <h1>{humanizeTime(state.count)}</h1>
+
+    <button onclick={actions.toggle}>
+      {state.paused ? "START" : "PAUSE"}
+    </button>
+
+    <button onclick={actions.reset}>RESET</button>
   </main>
 )
 
-export const main = app(state, actions, view, document.body)
+const main = app(state, actions, view, document.body)
+
+setInterval(main.tick, 1000)
