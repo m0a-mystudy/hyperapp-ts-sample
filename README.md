@@ -39,7 +39,7 @@ yarn add babel-preset-env hyperapp
 }
 ```
 parcelはindex.htmlをエントリーポイントとして指定できるみたいなので
-以下のようにindexhtmlを作ります。
+以下のようにindex.htmlを作ります。
 
 ```html
 <!DOCTYPE html>
@@ -183,9 +183,3 @@ parcel index.html
 
 一応githubにコードを置いておきます。
 https://github.com/m0a-mystudy/hyperapp-ts-sample
-
-
-
-
-
-
